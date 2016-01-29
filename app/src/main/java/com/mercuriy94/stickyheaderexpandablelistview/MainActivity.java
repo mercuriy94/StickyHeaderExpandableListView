@@ -33,8 +33,11 @@ public class MainActivity extends AppCompatActivity {
         mRootView.addView(mExpLisView);
         setGroupParents(20);
         setChildData(30);
-        ExpandableListView list = (ExpandableListView) mExpLisView.getChildAt(0);
+        final ExpandableListView list = (ExpandableListView) mExpLisView.getChildAt(0);
         list.setGroupIndicator(null);
+
+
+
         adapter = new MyExpandableAdapter(parentItems, childItems);
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
         mExpLisView.setAdapter(adapter);
@@ -62,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
         }
         childItems.add(child);
 
+
+
     }
+
+
+
 
 }
