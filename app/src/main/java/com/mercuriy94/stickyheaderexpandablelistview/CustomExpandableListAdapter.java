@@ -9,6 +9,7 @@ import android.widget.BaseExpandableListAdapter;
  */
 public abstract class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
+
     public abstract View getGroupHeaderView(int group, View convertView,ViewGroup parent);
 
 }

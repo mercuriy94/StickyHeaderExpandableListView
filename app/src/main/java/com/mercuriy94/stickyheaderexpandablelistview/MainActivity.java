@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         mRootView = (ViewGroup) ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
         mExpLisView = new ExpandableListViewStickyHeader.Builder()
                                                         .setContext(this)
-                                                        .setAutoCloseGroupe(false)
+                                                        .setAutoCloseGroupe(true)
                                                         .build();
 
         mRootView.addView(mExpLisView);
