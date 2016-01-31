@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         mRootView = (ViewGroup) ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
         mExpLisView = new ExpandableListViewStickyHeader.Builder()
                                                         .setContext(this)
-                                                        .setAutoCloseGroupe(true)
+                                                        .setAutoCloseGroupe(false)
                                                         .build();
 
         mRootView.addView(mExpLisView);
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setChildData(30);
         final ExpandableListView list = (ExpandableListView) mExpLisView.getChildAt(0);
         list.setGroupIndicator(null);
-
+        list.setDividerHeight(30);
 
 
         adapter = new MyExpandableAdapter(parentItems, childItems);

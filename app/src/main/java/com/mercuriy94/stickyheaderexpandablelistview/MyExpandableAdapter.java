@@ -45,8 +45,8 @@ public class MyExpandableAdapter extends CustomExpandableListAdapter {
 		}
 
 		LinearLayout container = (LinearLayout)convertView.findViewById(R.id.container);
-		if(childPosition == 17){
-			//container.getLayoutParams().height = 500;
+		if(childPosition == 3){
+		//	container.getLayoutParams().height = 1000;
 		}
 		
 		textView = (TextView) convertView.findViewById(R.id.textView1);
