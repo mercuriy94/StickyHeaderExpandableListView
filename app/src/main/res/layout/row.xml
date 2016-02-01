@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorSector"
-    tools:context=".MainActivity" >
+    tools:context="com.mercuriy94.demo.MainActivity" >
 
 
     <RelativeLayout

@@ -1,4 +1,4 @@
-package com.mercuriy94.stickyheaderexpandablelistview;
+package com.mercuriy94.demo;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mercuriy94.stickyheaderexpandablelistview.CustomExpandableListAdapter;
+import com.mercuriy94.stickyheaderexpandablelistview.R;
 
 import java.util.ArrayList;
 
