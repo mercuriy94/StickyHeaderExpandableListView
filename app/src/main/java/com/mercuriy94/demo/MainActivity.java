@@ -3,17 +3,23 @@ package com.mercuriy94.demo;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 
 import com.mercuriy94.stickyheaderexpandablelistview.ExpandableListViewStickyHeader;
 import com.mercuriy94.stickyheaderexpandablelistview.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AbsListView.OnScrollListener{
 
+
+    public static final String TAG = "myLogs";
     private ViewGroup mRootView;
     private ExpandableListViewStickyHeader mExpLisView;
 
@@ -21,24 +27,27 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> parentItems = new ArrayList<String>();
     private ArrayList<Object> childItems = new ArrayList<Object>();
     MyExpandableAdapter adapter;
-
+    FrameLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRootView = (ViewGroup) ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        container = (FrameLayout)findViewById(R.id.container);
         mExpLisView = new ExpandableListViewStickyHeader.Builder()
-                                                        .setContext(this)
-                                                        .setAutoCloseGroupe(true)
-                                                        .build();
+                .setContext(this)
+                .setAutoCloseGroupe(false)
+                .setOnScrollListener(this)
+                .build();
 
-        mRootView.addView(mExpLisView);
+        container.addView(mExpLisView);
         setGroupParents(20);
-        setChildData(10);
-        final ExpandableListView list = (ExpandableListView) mExpLisView.getChildAt(0);
+        setChildData(20);
+        final ExpandableListView list = mExpLisView.getExpandableListView();
         list.setGroupIndicator(null);
-        list.setDividerHeight(30);
+        list.setDividerHeight(3);
 
 
         adapter = new MyExpandableAdapter(parentItems, childItems);
@@ -70,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        Log.d(TAG, "переопределённый слушатель firstVisibleItem = " + firstVisibleItem);
+    }
 
 
 }
