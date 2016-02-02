@@ -4,19 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 
 import com.mercuriy94.stickyheaderexpandablelistview.ExpandableListViewStickyHeader;
 import com.mercuriy94.stickyheaderexpandablelistview.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AbsListView.OnScrollListener{
+public class MainActivity extends AppCompatActivity{
 
 
     public static final String TAG = "myLogs";
@@ -27,7 +23,8 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
     private ArrayList<String> parentItems = new ArrayList<String>();
     private ArrayList<Object> childItems = new ArrayList<Object>();
     MyExpandableAdapter adapter;
-    FrameLayout container;
+    ExpandableListViewStickyHeader listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,24 +32,15 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        container = (FrameLayout)findViewById(R.id.container);
-        mExpLisView = new ExpandableListViewStickyHeader.Builder()
-                .setContext(this)
-                .setAutoCloseGroupe(false)
-                .setOnScrollListener(this)
-                .build();
-
-        container.addView(mExpLisView);
         setGroupParents(20);
         setChildData(20);
-        final ExpandableListView list = mExpLisView.getExpandableListView();
-        list.setGroupIndicator(null);
-        list.setDividerHeight(3);
-
-
+        listView = (ExpandableListViewStickyHeader)findViewById(R.id.list);
         adapter = new MyExpandableAdapter(parentItems, childItems);
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
-        mExpLisView.setAdapter(adapter);
+        listView.setAdapter(adapter);
+        listView.setGroupIndicator(null);
+
+
     }
 
     public void setGroupParents(int num) {
@@ -79,15 +67,7 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
     }
 
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        Log.d(TAG, "переопределённый слушатель firstVisibleItem = " + firstVisibleItem);
-    }
 
 
 }
