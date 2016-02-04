@@ -380,6 +380,10 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
                 mExpandableListView.smoothScrollBy(-1, 0); //fix bag
                 updateScrollBar();
 
+                if(mOnStickyHeaderClickListener != null){
+                    mOnStickyHeaderClickListener.onStickyHeaderClick(mGroupInFocus);
+                }
+
             }
         });
         mHeader.getLayoutParams().height = mHeaderView.getMeasuredHeight();
