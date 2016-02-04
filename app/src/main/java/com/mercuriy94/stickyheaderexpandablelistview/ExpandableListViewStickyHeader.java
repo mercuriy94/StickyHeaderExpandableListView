@@ -31,6 +31,7 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
     private OnStickyHeaderClickListener mOnStickyHeaderClickListener;
     private CustomExpandableListAdapter mAdapter; //Адаптер
     private boolean mAutoCLoseGroup = false; //При открытии новой группы, предыдущая открытая закрывается
+    private boolean mClickCloseGroupe = true;
     protected boolean mOpenGroups[]; //хранение списка групп и их состояния(expanded = true/collapse = false)
     protected int mGroupInFocus = -1;
     protected int mLastExpandedPosition = -1;
@@ -291,6 +292,14 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
         this.mAutoCLoseGroup = mAutoCLoseGroup;
     }
 
+    public boolean isClickCloseGroupe() {
+        return mClickCloseGroupe;
+    }
+
+    public void setClickCloseGroupe(boolean mClickCloseGroupe) {
+        this.mClickCloseGroupe = mClickCloseGroupe;
+    }
+
     public CustomExpandableListView getExpandableListView() {
         return mExpandableListView;
     }
@@ -375,10 +384,13 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
             @Override
             public void onClick(View v) {
 
-                mExpandableListView.collapseGroup(mGroupInFocus);
-                mExpandableListView.setSelectedGroup(mGroupInFocus);
-                mExpandableListView.smoothScrollBy(-1, 0); //fix bag
-                updateScrollBar();
+                if(mClickCloseGroupe){
+                    mExpandableListView.collapseGroup(mGroupInFocus);
+                    mExpandableListView.setSelectedGroup(mGroupInFocus);
+                    mExpandableListView.smoothScrollBy(-1, 0); //fix bag
+                    updateScrollBar();
+                }
+
 
                 if(mOnStickyHeaderClickListener != null){
                     mOnStickyHeaderClickListener.onStickyHeaderClick(mGroupInFocus);
