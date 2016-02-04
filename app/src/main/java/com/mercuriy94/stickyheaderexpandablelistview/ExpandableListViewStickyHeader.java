@@ -28,7 +28,7 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
     private AbsListView.OnScrollListener mOnScrollListener;
     private ExpandableListView.OnGroupExpandListener mGroupExpandListener;
     private ExpandableListView.OnGroupCollapseListener mGroupCollapseListener;
-
+    private OnStickyHeaderClickListener mOnStickyHeaderClickListener;
     private CustomExpandableListAdapter mAdapter; //Адаптер
     private boolean mAutoCLoseGroup = false; //При открытии новой группы, предыдущая открытая закрывается
     protected boolean mOpenGroups[]; //хранение списка групп и их состояния(expanded = true/collapse = false)
@@ -54,7 +54,10 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
 
     public ExpandableListViewStickyHeader(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
 
+    public void setOnStickyHeaderClickListener(OnStickyHeaderClickListener onStickyHeaderClickListener){
+        this.mOnStickyHeaderClickListener = onStickyHeaderClickListener;
     }
 
 
@@ -103,7 +106,6 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
             if(mOnScrollListener != null){
                 mOnScrollListener.onScrollStateChanged(view, scrollState);
             }
-
         }
 
         @Override
@@ -376,7 +378,7 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
                 mExpandableListView.collapseGroup(mGroupInFocus);
                 mExpandableListView.setSelectedGroup(mGroupInFocus);
                 mExpandableListView.smoothScrollBy(-1, 0); //fix bag
-
+                updateScrollBar();
 
             }
         });
@@ -384,7 +386,7 @@ public class ExpandableListViewStickyHeader extends RelativeLayout{
         mHeader.addView(mHeaderView);
         mHeader.bringToFront();
         mScrollView.bringToFront();
-
+        requestLayout();
          Log.d(TAG, "Head show");
     }
 
